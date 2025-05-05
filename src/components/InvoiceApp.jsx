@@ -1,10 +1,11 @@
 import { getInvoice } from "../services/getInvoice";
+import { ClientView } from "./ClientView";
+import { CompanyView } from "./CompanyView";
+import { InvoiceView } from "./InvoiceView";
 
 export const InvoiceApp = () => {
 
     const { id, name, client, company, items } = getInvoice();
-    const { name: nameClient, lastname, address } = client;
-    const { country, city, street, number } = address;
 
     return (
         <>
@@ -17,28 +18,16 @@ export const InvoiceApp = () => {
 
                     <div className="card-body">
 
-                        <ul className="list-group">
-                            <li className="list-group-item">Id: {id}</li>
-                            <li className="list-group-item">Name: {name}</li>
-                        </ul>
+                        <InvoiceView id={id} name={name}/>
 
                         <div className="row my-3">
 
                             <div className="col">
-                                <h3>Datos del cliente</h3>
-                                <ul className="list-group">
-                                    <li className="list-group-item active">{nameClient} {lastname}</li>
-                                    <li className="list-group-item">{country} / {city} </li>
-                                    <li className="list-group-item">{street} {number}</li>
-                                </ul>
+                                <ClientView title={"Datos del cliente"} client={client}/>
                             </div>
 
                             <div className="col">
-                                <h3>Datos de la empresa</h3>
-                                <ul className="list-group">
-                                    <li className="list-group-item active">{company.name}</li>
-                                    <li className="list-group-item">{company.fiscalNumber}</li>
-                                </ul>
+                                <CompanyView title={"Datos de la empresa"} company={company}/>
                             </div>
                         </div>
 
