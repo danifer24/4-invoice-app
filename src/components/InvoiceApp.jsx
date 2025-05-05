@@ -2,15 +2,49 @@ import { getInvoice } from "../services/getInvoice";
 
 export const InvoiceApp = () => {
 
-    const invoice = getInvoice();
-    
-    return(
+    const { id, name, client, company, items } = getInvoice();
+    const { name: nameClient, lastname, address } = client;
+    const { country, city, street, number } = address;
+
+    return (
         <>
-        <h1>Ejemplo factura</h1>
-        <ul>
-            <li>Id: { invoice.id }</li>
-            <li>Name: { invoice.nombre }</li>
-        </ul>
+            <h1>Ejemplo factura</h1>
+            <ul>
+                <li>Id: {id}</li>
+                <li>Name: {name}</li>
+            </ul>
+
+            <h3>Datos del cliente</h3>
+            <ul>
+                <li>{nameClient} {lastname}</li>
+                <li>{country}</li>
+                <li>{city}</li>
+                <li>{street} {number}</li>
+            </ul>
+
+            <h3>Datos de la empresa</h3>
+            <ul>
+                <li>{company.name}</li>
+                <li>{company.fiscalNumber}</li>
+            </ul>
+            <h4>Productos de la factura</h4>
+            <table>
+                <thead>
+                    <th>
+                        <tr>Producto</tr>
+                        <tr>Precio</tr>
+                        <tr>Cantidad</tr>
+                    </th>
+                </thead>
+                <tbody>
+                    {items.map(({ product, price, quantity }) => (<tr>
+                        <td> {product} </td>
+                        <td> {price} </td>
+                        <td> {quantity} </td>
+                    </tr>
+                    ))}
+                </tbody>
+            </table>
         </>
     )
 }
