@@ -20,21 +20,47 @@ export const InvoiceApp = () => {
 
                     <div className="card-body">
 
-                        <InvoiceView id={id} name={name}/>
+                        <InvoiceView id={id} name={name} />
 
                         <div className="row my-3">
 
                             <div className="col">
-                                <ClientView title={"Datos del cliente"} client={client}/>
+                                <ClientView title={"Datos del cliente"} client={client} />
                             </div>
 
                             <div className="col">
-                                <CompanyView title={"Datos de la empresa"} company={company}/>
+                                <CompanyView title={"Datos de la empresa"} company={company} />
                             </div>
                         </div>
 
-                        <ListItemsView title={"Productos de la factura"} items={items}/>
-                        <TotalView total={ total }/>
+                        <ListItemsView title={"Productos de la factura"} items={items} />
+                        <TotalView total={total} />
+                        <form action="get">
+                            <input 
+                            type="text" 
+                            name="product" 
+                            placeholder="Producto"  
+                            className="form-control m-2" 
+                            onChange={ event => { 
+                                console.log(event.target.value)
+                                }} />
+                            <input 
+                            type="text" 
+                            name="price" 
+                            placeholder="Precio"  
+                            className="form-control m-2" 
+                            onChange={ event => { 
+                                console.log(event.target.value)
+                                }} />
+                            <input 
+                            type="text" 
+                            name="quantity" 
+                            placeholder="Cantidad"  
+                            className="form-control m-2" 
+                            onChange={ event => { 
+                                console.log(event.target.value)
+                                }} />
+                        </form>
                     </div>
                 </div>
             </div>
