@@ -11,10 +11,12 @@ export const InvoiceApp = () => {
     const { id, name, client, company, items: initialItems, total } = getInvoice();
 
     const [productValue, setProductValue] = useState('');
-    const [priceValue, setPriceValue] = useState(0);
-    const [quantityValue, setQuantityValue] = useState(0);
+    const [priceValue, setPriceValue] = useState('');
+    const [quantityValue, setQuantityValue] = useState('');
 
     const [items, setItems] = useState(initialItems);
+
+    const [counter, setCounter] = useState(4);
 
     return (
         <>
@@ -45,11 +47,37 @@ export const InvoiceApp = () => {
                         <form className="w-50" onSubmit={event => {
                             event.preventDefault();
 
-                            setItems([...items, { key: 4, product: productValue, price: priceValue, quantity: quantityValue }]);
+                            if(productValue.trim().length < 1) {
+                                alert("Error, no se ha especificado un producto");
+                                return};
+                            if(priceValue.trim().length < 1) {
+                                alert("Error, no se ha especificado un precio");
+                                return};
+                            if(isNaN(priceValue.trim())) {
+                                alert("Error, el precio no es un número");
+                                return};
+                            if(quantityValue.trim().length < 1) {
+                                alert("Error, no se ha especificado una cantidad");
+                                return};
+                            if(isNaN(quantityValue.trim())) {
+                                alert("Error, la cantidad no es un número");
+                                return};
+
+                            setItems([...items, {
+                                id: counter,
+                                product: productValue.trim(),
+                                price: priceValue.trim(),
+                                quantity: quantityValue.trim()
+                            }]);
+                            setProductValue('');
+                            setPriceValue('');
+                            setQuantityValue('');
+                            setCounter(counter + 1);
                         }}>
                             <input
                                 type="text"
                                 name="product"
+                                value={productValue}
                                 placeholder="Producto"
                                 className="form-control m-2"
                                 onChange={event => {
@@ -59,6 +87,7 @@ export const InvoiceApp = () => {
                             <input
                                 type="text"
                                 name="price"
+                                value={priceValue}
                                 placeholder="Precio"
                                 className="form-control m-2"
                                 onChange={event => {
@@ -68,6 +97,7 @@ export const InvoiceApp = () => {
                             <input
                                 type="text"
                                 name="quantity"
+                                value={quantityValue}
                                 placeholder="Cantidad"
                                 className="form-control m-2"
                                 onChange={event => {
@@ -76,8 +106,8 @@ export const InvoiceApp = () => {
                                 }} />
                             <button
                                 type="submit"
-                                className="btn btn-primary"
-                            >Crear Item</button>
+                                className="btn btn-primary m-2"
+                            >Nuevo Item</button>
                         </form>
                     </div>
                 </div>
