@@ -1,8 +1,14 @@
 
 export const ClientView = ({title, client}) => {
 
-    const { name: nameClient, lastname, address } = client;
-    const { country, city, street, number } = address;
+    const { name: nameClient,
+         lastname, 
+         address: { 
+            country, 
+            city, 
+            street, 
+            number }
+        } = client;
 
     return (
         <>
