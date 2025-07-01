@@ -7,7 +7,7 @@ export const invoice = {
     address: {
       country: "Spain",
       city: "Arriondas",
-      street: "Callejuela",
+      street: "Santa María",
       number: 15,
     },
   },
